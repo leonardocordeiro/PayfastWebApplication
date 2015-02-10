@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
+	<title>Payfast</title>
+	<f:metadata>
+		<f:viewParam name="client_id" value="#{loginBean.aplicacao.clientId}" />
+		<f:viewParam name="client_secret" value="#{loginBean.aplicacao.clientSecret}" />
+		<f:viewParam name="redirect_uri" value="#{loginBean.callbackUrl}" />
+		
+		<f:event type="preRenderView" listener="#{loginBean.verificaCredenciais}" />
+	</f:metadata>
+</h:head>
+<h:body>
+<h:messages />
+	<h:outputText value="Client ID ou Client Secret inválido" rendered="#{!loginBean.login}" />
+	<h:form rendered="#{loginBean.login != false}">
+	<fieldset>
+		<legend>Payfast Login</legend>
+			<h:panelGrid columns="2">
+				<h:outputText value="Email: " />
+				<h:inputText value="#{loginBean.usuario.email}" />
+				
+				<h:outputText value="Senha: " />
+				<h:inputSecret value="#{loginBean.usuario.senha}" />
+				
+				<h:commandButton action="#{loginBean.login}" value="Logar" />
+			</h:panelGrid>
+	</fieldset>
+	</h:form>
+</h:body>
+</html>
