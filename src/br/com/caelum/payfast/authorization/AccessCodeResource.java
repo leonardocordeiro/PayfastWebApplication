@@ -3,6 +3,7 @@ package br.com.caelum.payfast.authorization;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,6 +28,7 @@ public class AccessCodeResource {
     @Inject private AplicacaoDao aplicacaoDao;
     
     @GET
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Response returnAccessToken(@Context HttpServletRequest request) {
 		String authorizationToken = request.getParameter("code");
